@@ -85,7 +85,7 @@ class Browser(QtWidgets.QWidget):
 
     def zoom_changed(self):
         self.webview.setZoomFactor(self.zoom_slider.value()/10)
-
+        
     def search_btn_clicked(self):
         self.webview.load("https://www.google.com/search?q="
                           + self.search_box.text())
@@ -102,26 +102,7 @@ class BrowserWindow (QtWidgets.QMainWindow) :
         self.widget = Browser()
         self.setCentralWidget (self.widget)
 
-        self.exitAction = QtWidgets.QAction(QtGui.QIcon('exit.png'), '&Exit', self)
-        self.exitAction.setShortcut('Ctrl+Q')
-        self.exitAction.setStatusTip('Exit application')
-        self.exitAction.triggered.connect(self.close)
 
-        self.openFile = QtWidgets.QAction(QtGui.QIcon('open.png'), 'Open', self)
-        self.openFile.setShortcut('Ctrl+o')
-        self.openFile.setStatusTip('Open New File')
-        self.openFile.triggered.connect(self.showDialog)
-
-
-        self.menu = self.menuBar()
-        self.fileMenu = self.menu.addMenu('&File')
-        self.fileMenu.addAction(self.openFile)
-        self.fileMenu.addAction(self.exitAction)
-
-    def showDialog(self):
-        fname, _ =QFileDialog.getOpenFileName(self, 'Open file',
-                    '/Documents')
-        self.widget.webview.load("file:///" + fname)
 
 #Create a QT application
 app = QApplication(sys.argv)
